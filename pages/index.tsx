@@ -1,6 +1,6 @@
+import { Main } from 'modules/main';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { MainView } from '@views/main';
 
 const MainPage: NextPage = () => {
   return (
@@ -12,7 +12,7 @@ const MainPage: NextPage = () => {
       </Head>
 
       <main className="relative w-full h-full">
-        <MainView />
+        <Main />
       </main>
     </div>
   );

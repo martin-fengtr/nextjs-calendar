@@ -1,2 +1,2 @@
-export type { HeaderProps, ViewMode } from './header';
-export { Header } from './header';
+export type { HeaderProps } from './Header';
+export { Header } from './Header';

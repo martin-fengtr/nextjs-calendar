@@ -1,15 +1,19 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'components/button';
+import { ViewMode } from 'contexts/calendar';
 import format from 'date-fns/format';
-import { Button } from '@components/button';
-
-export type ViewMode = 'month' | 'week';
+import isSameMonth from 'date-fns/isSameMonth';
+import isSameWeek from 'date-fns/isSameWeek';
 
 export interface HeaderProps {
   viewMode: ViewMode;
   startDate: Date;
   endDate?: Date;
   onRefresh?: () => void;
-  onViewModeChanged?: (mode: ViewMode) => void;
+  toggleViewMode?: () => void;
+  onNext?: () => void;
+  onPrev?: () => void;
+  onToday?: () => void;
   children?: never;
 }
 
@@ -18,17 +22,14 @@ export const Header: FunctionComponent<HeaderProps> = ({
   startDate,
   endDate,
   onRefresh,
-  onViewModeChanged,
+  toggleViewMode,
+  onNext,
+  onPrev,
+  onToday,
 }) => {
-  const handleChangeViewMode = () => {
-    if (onViewModeChanged) {
-      if (viewMode === 'month') {
-        onViewModeChanged('week');
-      } else {
-        onViewModeChanged('month');
-      }
-    }
-  };
+  const today = new Date();
+  const isToday =
+    (viewMode === 'week' && isSameWeek(today, startDate)) || (viewMode === 'month' && isSameMonth(today, startDate));
 
   return (
     <div className="h-[64px] p-[12px] flex flex-row items-center space-x-[8px] bg-blueGray-200">
@@ -55,7 +56,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
       <div className="flex-1"></div>
 
       <div>
-        <Button>
+        <Button onClick={onPrev}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
             <path
               d="M81.1,31.9c-1.2-1.2-3.1-1.2-4.2,0l-30,30c-1.2,1.2-1.2,3.1,0,4.2l30,30c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9 c1.2-1.2,1.2-3.1,0-4.2L53.2,64l27.9-27.9C82.3,34.9,82.3,33.1,81.1,31.9z"
@@ -63,7 +64,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
             />
           </svg>
         </Button>
-        <Button>
+        <Button onClick={onNext}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
             <path
               d="M46.9,96.1c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9l30-30c1.2-1.2,1.2-3.1,0-4.2l-30-30c-1.2-1.2-3.1-1.2-4.2,0 c-1.2,1.2-1.2,3.1,0,4.2L74.8,64L46.9,91.9C45.7,93.1,45.7,94.9,46.9,96.1z"
@@ -73,9 +74,11 @@ export const Header: FunctionComponent<HeaderProps> = ({
         </Button>
       </div>
 
-      <Button disabled>Today</Button>
+      <Button onClick={onToday} disabled={isToday}>
+        Today
+      </Button>
 
-      <Button className="!ml-[24px]">
+      <Button className="!ml-[24px]" onClick={onRefresh}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
           <path
             d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 L 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 C 14.205991 4 16.202724 4.9004767 17.650391 6.3496094 L 15 9 L 22 9 L 22 2 L 19.060547 4.9394531 C 17.251786 3.1262684 14.757292 2 12 2 z"
@@ -83,7 +86,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
           />
         </svg>
       </Button>
-      <Button onClick={handleChangeViewMode}>{viewMode === 'month' ? 'Month' : 'Week'}</Button>
+      <Button onClick={toggleViewMode}>{viewMode === 'month' ? 'Month' : 'Week'}</Button>
     </div>
   );
 };
