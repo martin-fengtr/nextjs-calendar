@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { MainView } from '@views/main';
 
-const Home: NextPage = () => {
+const MainPage: NextPage = () => {
   return (
     <div className="min-h-screen h-screen">
       <Head>
@@ -10,9 +11,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className=""></main>
+      <main className="relative w-full h-full">
+        <MainView />
+      </main>
     </div>
   );
 };
 
-export default Home;
+export default MainPage;
