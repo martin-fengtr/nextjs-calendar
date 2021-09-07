@@ -15,18 +15,14 @@ export interface CalendarProps {
 export const Calendar: FunctionComponent<CalendarProps> = ({ viewMode, activeDate }) => {
   const { headers, body, navigation } = useCalendar({ defaultDate: activeDate });
 
-  useEffect(() => {
-    navigation.setDate(activeDate);
-  }, [navigation, activeDate]);
-
   const renderDate = useCallback(
     (key: string, value: Date) => {
       const isThisMonth = isSameMonth(activeDate, value);
       const isHighlight = viewMode === 'month' ? true : isSameWeek(activeDate, value);
-      const className = clsx('p-[8px]', {
+      const className = clsx('p-[8px] text-[12px]', {
         'text-blueGray-400': !isThisMonth,
         'text-black': isThisMonth,
-        'bg-blueGray-200': isHighlight,
+        'bg-blueGray-100': isHighlight,
       });
       return (
         <td key={key} align="center" className={className}>
@@ -37,13 +33,17 @@ export const Calendar: FunctionComponent<CalendarProps> = ({ viewMode, activeDat
     [viewMode, activeDate],
   );
 
+  useEffect(() => {
+    navigation.setDate(activeDate);
+  }, [navigation, activeDate]);
+
   return (
-    <div className="p-[8px] text-[12px]">
+    <div className="p-[8px]">
       <table>
         <thead>
           <tr>
             {headers.weekDays.map(({ key, value }) => (
-              <th key={key} className="pb-[4px]">
+              <th key={key} className="pb-[4px] text-[10px]">
                 {format(value, 'E')}
               </th>
             ))}

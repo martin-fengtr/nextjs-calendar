@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'components/button';
+import { Button } from 'components/common/button';
 import { ViewMode } from 'contexts/calendar';
 import format from 'date-fns/format';
 import isSameMonth from 'date-fns/isSameMonth';
@@ -14,6 +14,7 @@ export interface HeaderProps {
   onNext?: () => void;
   onPrev?: () => void;
   onToday?: () => void;
+  onSignOut?: () => void;
   children?: never;
 }
 
@@ -26,13 +27,14 @@ export const Header: FunctionComponent<HeaderProps> = ({
   onNext,
   onPrev,
   onToday,
+  onSignOut,
 }) => {
   const today = new Date();
-  const isToday =
+  const isTodaySelected =
     (viewMode === 'week' && isSameWeek(today, startDate)) || (viewMode === 'month' && isSameMonth(today, startDate));
 
   return (
-    <div className="h-[64px] p-[12px] flex flex-row items-center space-x-[8px] bg-blueGray-200">
+    <div className="h-[64px] p-[12px] flex flex-row items-center space-x-[8px] bg-blueGray-100 border-b border-blueGray-200">
       <span className="text-pink-400 w-[40px] h-[40px]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
           <path
@@ -74,19 +76,31 @@ export const Header: FunctionComponent<HeaderProps> = ({
         </Button>
       </div>
 
-      <Button onClick={onToday} disabled={isToday}>
+      <Button onClick={onToday} disabled={isTodaySelected}>
         Today
       </Button>
 
       <Button className="!ml-[24px]" onClick={onRefresh}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
           <path
             d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 L 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 C 14.205991 4 16.202724 4.9004767 17.650391 6.3496094 L 15 9 L 22 9 L 22 2 L 19.060547 4.9394531 C 17.251786 3.1262684 14.757292 2 12 2 z"
             fill="currentColor"
           />
         </svg>
       </Button>
+
       <Button onClick={toggleViewMode}>{viewMode === 'month' ? 'Month' : 'Week'}</Button>
+
+      <Button variant="primary">New Event</Button>
+
+      <Button onClick={onSignOut}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+          <path
+            d="M 6 4 L 6 28 L 26 28 L 26 20 L 24 22 L 24 26 L 8 26 L 8 6 L 24 6 L 24 10 L 26 12 L 26 4 Z M 22.40625 11 L 21 12.40625 L 23.5625 15 L 13.90625 15 L 13.90625 17 L 23.5625 17 L 21 19.59375 L 22.40625 21 L 26.71875 16.71875 L 27.40625 16 L 26.71875 15.28125 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </Button>
     </div>
   );
 };
