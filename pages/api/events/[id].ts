@@ -7,7 +7,7 @@ export default nc<NextApiRequest, NextApiResponse>()
   .use(cors())
   .get(async (req, res) => {
     const session = await getSession({ req });
-    const response = await fetch(`${process.env.API_URL}/events/`, {
+    const response = await fetch(`${process.env.API_URL}/events/${req.query.id}/`, {
       method: 'GET',
       headers: {
         Authorization: (session?.accessToken as string) ?? '',
@@ -15,15 +15,24 @@ export default nc<NextApiRequest, NextApiResponse>()
     }).then((data) => data.json());
     res.json(response);
   })
-  .post(async (req, res) => {
+  .delete(async (req, res) => {
     const session = await getSession({ req });
-    const response = await fetch(`${process.env.API_URL}/events/`, {
-      method: 'POST',
+    const response = await fetch(`${process.env.API_URL}/events/${req.query.id}/`, {
+      method: 'DELETE',
       headers: {
         Authorization: (session?.accessToken as string) ?? '',
-        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: req.body as URLSearchParams,
+    }).then((data) => data.json());
+    res.json(response);
+  })
+  .patch(async (req, res) => {
+    const session = await getSession({ req });
+    const response = await fetch(`${process.env.API_URL}/events/${req.query.id}/`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: (session?.accessToken as string) ?? '',
+      },
+      body: req.body,
     }).then((data) => data.json());
     res.json(response);
   });

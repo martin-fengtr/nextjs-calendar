@@ -14,6 +14,7 @@ export interface HeaderProps {
   onNext?: () => void;
   onPrev?: () => void;
   onToday?: () => void;
+  onNewEvent?: () => void;
   onSignOut?: () => void;
   children?: never;
 }
@@ -27,6 +28,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
   onNext,
   onPrev,
   onToday,
+  onNewEvent,
   onSignOut,
 }) => {
   const today = new Date();
@@ -91,7 +93,9 @@ export const Header: FunctionComponent<HeaderProps> = ({
 
       <Button onClick={toggleViewMode}>{viewMode === 'month' ? 'Month' : 'Week'}</Button>
 
-      <Button variant="primary">New Event</Button>
+      <Button variant="primary" onClick={onNewEvent}>
+        New Event
+      </Button>
 
       <Button onClick={onSignOut}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">

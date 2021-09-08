@@ -1,46 +1,59 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useContext, useEffect } from 'react';
 import useCalendar from '@veccu/react-calendar';
 import clsx from 'clsx';
+import { CalendarContext } from 'contexts/calendar';
 import endOfDay from 'date-fns/endOfDay';
 import format from 'date-fns/format';
 import isSameMonth from 'date-fns/isSameMonth';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import startOfDay from 'date-fns/startOfDay';
-import { Event } from 'models/Event';
+import { useEvents } from 'hooks/useEvents';
 import { MonthCell } from './MonthCell';
 
 export interface MonthProps {
-  activeDate: Date;
-  events: Event[];
   children?: never;
 }
 
-export const Month: FunctionComponent<MonthProps> = ({ activeDate, events }) => {
+export const Month: FunctionComponent<MonthProps> = () => {
+  const { events } = useEvents();
+  const { viewMode, activeDate } = useContext(CalendarContext);
   const { headers, body, navigation } = useCalendar({ defaultDate: activeDate });
+
+  const classes = {
+    root: 'h-full flex flex-col flex-1',
+    weekContainer: 'flex border-b border-blueGray-200',
+    weekCell: 'h-[36px] flex flex-1 justify-center items-center',
+    daysContainer: 'flex flex-col flex-1 divide-y-[1px] divide-blueGray-200',
+    daysRow: 'flex flex-1 divide-x-[1px] divide-blueGray-200',
+    dayCell: (date: Date) =>
+      clsx('flex-1', {
+        'bg-blueGray-100': !isSameMonth(activeDate, date),
+      }),
+  };
 
   useEffect(() => {
     navigation.setDate(activeDate);
   }, [navigation, activeDate]);
 
+  if (viewMode !== 'month') {
+    return null;
+  }
+
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex border-b border-blueGray-200">
+    <div className={classes.root}>
+      <div className={classes.weekContainer}>
         {headers.weekDays.map(({ key, value }) => (
-          <div key={key} className="h-[36px] flex flex-1 justify-center items-center">
-            {format(value, 'E')}
+          <div key={key} className={classes.weekCell}>
+            {format(value, 'E')}{' '}
           </div>
         ))}
       </div>
-      <div className="flex flex-col flex-1 divide-y-[1px] divide-blueGray-200">
+
+      <div className={classes.daysContainer}>
         {body.value.map(({ key: weekKey, value: days }) => (
-          <div key={weekKey} className="flex flex-1 divide-x-[1px] divide-blueGray-200">
+          <div key={weekKey} className={classes.daysRow}>
             {days.map(({ key: dayKey, value }, index: number) => (
-              <div
-                key={dayKey}
-                className={clsx('flex-1', {
-                  'bg-blueGray-100': !isSameMonth(activeDate, value),
-                })}
-              >
+              <div key={dayKey} className={classes.dayCell(value)}>
                 <MonthCell
                   date={value}
                   showMonth={index === 0 || value.getDate() === 1}

@@ -15,14 +15,17 @@ export interface MonthCellProps {
 export const MonthCell: FunctionComponent<MonthCellProps> = ({ date, events, showMonth }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const rootClass = clsx('w-full h-full p-[8px] text-[12px]', {
-    'border border-blue-200': isToday(date),
-  });
+  const classes = {
+    root: clsx('w-full h-full p-[8px] text-[12px]', {
+      'border border-blue-400': isToday(date),
+    }),
+    date: 'mb-[8px]',
+  };
   const dateLabel = showMonth ? format(date, 'MMM d') : date.getDate();
 
   return (
-    <div ref={ref} className={rootClass}>
-      <p className="mb-[8px]">{dateLabel}</p>
+    <div ref={ref} className={classes.root}>
+      <p className={classes.date}>{dateLabel}</p>
 
       {events.map((event) => (
         <MonthEvent key={event.id} event={event} />

@@ -8,12 +8,12 @@ import useSWR from 'swr';
 export interface UseEventsInterface {
   isLoading: boolean;
   events: Event[];
-  create: (event: Event) => Promise<Response>;
-  update: (event: Event) => Promise<Response>;
-  delete: (event: Event) => Promise<Response>;
+  createEvent: (event: Event) => Promise<any>;
+  updateEvent: (event: Event) => Promise<any>;
+  deleteEvent: (event: Event) => Promise<any>;
 }
 
-const fetcher = async (url: string, method: string, body?: any): Promise<any> =>
+const fetcher = async (url: string, method = 'GET', body: any = null): Promise<any> =>
   fetch(`/api/${url}`, { method, body }).then((res) => res.json());
 
 export const useEvents = (): UseEventsInterface => {
@@ -53,8 +53,8 @@ export const useEvents = (): UseEventsInterface => {
 
   const getParams = (event: Event): URLSearchParams => {
     const body = new URLSearchParams();
-    body.append('activity_date_time ', format(event.activityDateTime, 'YYYY-MM-DDThh:mm:ss'));
-    body.append('duration_in_minutes  ', event.durationInMinutes.toString());
+    body.append('activity_date_time', format(event.activityDateTime, `yyyy-MM-dd'T'HH:mm:ss`));
+    body.append('duration_in_minutes', event.durationInMinutes.toString());
     body.append('subject', event.subject);
     body.append('description', event.description);
     body.append('location', event.location ?? '');
@@ -64,8 +64,8 @@ export const useEvents = (): UseEventsInterface => {
   return {
     isLoading: !events && !error,
     events,
-    create: (event: Event): Promise<any> => fetcher('events', 'POST', getParams(event)),
-    update: (event: Event): Promise<any> => fetcher(`events/${event.id}`, 'PUT', getParams(event)),
-    delete: (event: Event): Promise<any> => fetcher(`events/${event.id}`, 'DELETE'),
+    createEvent: (event: Event): Promise<any> => fetcher('events', 'POST', getParams(event)),
+    updateEvent: (event: Event): Promise<any> => fetcher(`events/${event.id}`, 'PATCH', getParams(event)),
+    deleteEvent: (event: Event): Promise<any> => fetcher(`events/${event.id}`, 'DELETE'),
   };
 };

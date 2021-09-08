@@ -30,7 +30,7 @@ export const Login: FunctionComponent<LoginProps> = () => {
   };
 
   const inputClass =
-    'mt-[12px] px-[12px] py-[8px] rounded-[8px] text-[16px] leading-[24px] tracking-[0.75px] focus:outline-none ring ring-blueGray-200 focus:ring-2 focus:ring-blue-300';
+    'mt-[12px] px-[12px] py-[8px] rounded-[8px] text-[16px] leading-[24px] tracking-[0.75px] focus:outline-none ring-1 ring-blueGray-200 focus:ring-2 focus:ring-blue-300';
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-blueGray-200">

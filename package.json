@@ -17,12 +17,15 @@
     "next-auth": "^3.29.0",
     "next-connect": "^0.10.2",
     "react": "17.0.2",
+    "react-datepicker": "^4.2.1",
     "react-dom": "17.0.2",
     "swr": "^1.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/react": "17.0.19",
+    "@types/react-datepicker": "^4.1.6",
+    "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "autoprefixer": "^10.3.4",
