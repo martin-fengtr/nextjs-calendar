@@ -61,7 +61,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
 
       <div>
         <Button onClick={onPrev}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="20" height="20">
             <path
               d="M81.1,31.9c-1.2-1.2-3.1-1.2-4.2,0l-30,30c-1.2,1.2-1.2,3.1,0,4.2l30,30c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9 c1.2-1.2,1.2-3.1,0-4.2L53.2,64l27.9-27.9C82.3,34.9,82.3,33.1,81.1,31.9z"
               fill="currentColor"
@@ -69,7 +69,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
           </svg>
         </Button>
         <Button onClick={onNext}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="20" height="20">
             <path
               d="M46.9,96.1c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9l30-30c1.2-1.2,1.2-3.1,0-4.2l-30-30c-1.2-1.2-3.1-1.2-4.2,0 c-1.2,1.2-1.2,3.1,0,4.2L74.8,64L46.9,91.9C45.7,93.1,45.7,94.9,46.9,96.1z"
               fill="currentColor"
@@ -83,7 +83,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
       </Button>
 
       <Button className="!ml-[24px]" onClick={onRefresh}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
           <path
             d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 L 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 C 14.205991 4 16.202724 4.9004767 17.650391 6.3496094 L 15 9 L 22 9 L 22 2 L 19.060547 4.9394531 C 17.251786 3.1262684 14.757292 2 12 2 z"
             fill="currentColor"
@@ -98,7 +98,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
       </Button>
 
       <Button onClick={onSignOut}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20">
           <path
             d="M 6 4 L 6 28 L 26 28 L 26 20 L 24 22 L 24 26 L 8 26 L 8 6 L 24 6 L 24 10 L 26 12 L 26 4 Z M 22.40625 11 L 21 12.40625 L 23.5625 15 L 13.90625 15 L 13.90625 17 L 23.5625 17 L 21 19.59375 L 22.40625 21 L 26.71875 16.71875 L 27.40625 16 L 26.71875 15.28125 Z"
             fill="currentColor"
