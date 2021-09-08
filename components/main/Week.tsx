@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { FunctionComponent, useContext, useMemo, useRef } from 'react';
 import clsx from 'clsx';
 import { CalendarContext } from 'contexts/calendar';
 import addDays from 'date-fns/addDays';
