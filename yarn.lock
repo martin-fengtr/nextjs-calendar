@@ -87,6 +87,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@h6s/calendar@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@h6s/calendar/-/calendar-1.0.5.tgz#d21a1fc061ba759b64d157862ba2adab5164d7f2"
+  integrity sha512-NcGd1U3uLr8dLVqem2yVssSm+Un9BtC3JhIHf6zMIM7Lml3x/bz3WkNWMOFCMCifEVgssLoyqZ1omR5ebNeXTg==
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
@@ -392,11 +397,6 @@
   dependencies:
     "@typescript-eslint/types" "4.30.0"
     eslint-visitor-keys "^2.0.0"
-
-"@veccu/react-calendar@^2.3.2":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@veccu/react-calendar/-/react-calendar-2.3.2.tgz#92cf593d11d2c93ace81b357cdb2fdbb103ef71f"
-  integrity sha512-RWZtJZl5xq9v4lDbvqEYRtmNUt5eqxZyXai5JF+dGhVO21zsBKrGVlWvIcCazIW0EHLyfLMgKmpMub+ihw36RA==
 
 acorn-jsx@^5.3.1:
   version "5.3.2"

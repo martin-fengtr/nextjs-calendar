@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext, useEffect } from 'react';
-import useCalendar from '@veccu/react-calendar';
+import { useCalendar } from '@h6s/calendar';
 import { CalendarContext } from 'contexts/calendar';
 import format from 'date-fns/format';
 import { CalendarCell } from './CalendarCell';

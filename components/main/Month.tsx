@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext, useEffect } from 'react';
-import useCalendar from '@veccu/react-calendar';
+import { useCalendar } from '@h6s/calendar';
 import clsx from 'clsx';
 import { CalendarContext } from 'contexts/calendar';
 import endOfDay from 'date-fns/endOfDay';
